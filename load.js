@@ -48,7 +48,7 @@ let showcard = (info)=>{
 
                 <div  class="borders-t h-1.5 bg-[#10b981] w-full"></div>
                     
-                <div class="p-6 pb-4">
+                <div onclick="modalinfo(${element.id})" class="p-6 pb-4">
                     <div class="flex justify-between items-center mb-4">
                         <div
                             class="w-10 h-10  rounded-full flex items-center justify-center">
@@ -97,6 +97,75 @@ let showcard = (info)=>{
 }
 loadcard()
 
+let modalinfo=(id)=>{
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
+    .then(res =>res.json())
+    .then(data => showmodal(data.data))
+}
+
+let showmodal = (info) => {
+
+  let showModals = document.getElementById("shwodata");
+
+  showModals.innerHTML = `
+    
+<div class="p-4 space-y-6">
+
+  <div>
+    <h2 class="text-3xl font-bold text-slate-800">
+      ${info.title}
+    </h2>
+
+    <div class="flex items-center gap-3 mt-3 text-gray-500">
+
+      <span class="px-3 py-1 bg-green-500 text-white text-xs rounded-full">
+        ${info.status}
+      </span>
+
+      <span>• Opened by ${info.author || "Unknown"}</span>
+
+      <span>• ${info.createdAt.split("T")[0]}</span>
+
+    </div>
+  </div>
+
+  <div class="flex gap-3 flex-wrap">
+    ${(info.labels || []).map(label => `
+      <span class="px-3 py-1 bg-red-100 text-red-500 rounded-full text-sm font-semibold uppercase">
+        ${label}
+      </span>
+    `).join("")}
+  </div>
+
+  <p class="text-gray-600 text-lg">
+    ${info.description}
+  </p>
+
+  <div class="bg-gray-100 rounded-xl p-6 flex justify-between items-center">
+
+    <div>
+      <p class="text-gray-500 text-sm">Assignee:</p>
+      <p class="text-xl font-semibold">${info.assignee || "unknown"}</p>
+    </div>
+
+    <div>
+      <p class="text-gray-500 text-sm">Priority:</p>
+      <span class="px-4 py-1 bg-red-500 text-white rounded-full text-sm font-bold uppercase">
+        ${info.priority}
+      </span>
+    </div>
+
+  </div>
+
+</div>
+`;
+
+  document.getElementById("my_modal_5").showModal();
+}
+
+function closeModal(){
+  document.getElementById("my_modal_5").close();
+}
 
 
 let changecolor = ()=>{
