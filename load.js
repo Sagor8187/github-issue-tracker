@@ -4,6 +4,7 @@ let loadcard =async ()=>{
     // console.log(res.data.length)
     totalcount(res.data)
     showcard(res.data)
+    filteritem(res.data)
 }
 let totalcount = (data)=>{
     let total = document.getElementById("total-count")
@@ -70,18 +71,11 @@ let showcard = (info)=>{
 }
 loadcard()
 
-let tooglebtn = (id)=>{
-    let allbtn = document.querySelectorAll(".btns")
 
-    allbtn.forEach(btn => btn.classList.remove("btn-primary"))
-
-    let currentbtn = document.getElementById(id)
-    currentbtn.classList.add("btn-primary")
-}
 
 let changecolor = ()=>{
-    let borders = document.querySelectorAll(".borders-t");  // সব border div
-    let priorities = document.querySelectorAll(".priority"); // সব priority span
+    let borders = document.querySelectorAll(".borders-t");  
+    let priorities = document.querySelectorAll(".priority"); 
     let icons = document.querySelectorAll(".icon")
     
     priorities.forEach((item, index) => {
@@ -92,8 +86,8 @@ let changecolor = ()=>{
             item.classList.remove("bg-red-50","text-red-500");
             item.classList.add("bg-gray-100","text-gray-500");
 
-            icons[index].src= "./assets/Closed- Status .png"
-            // Corresponding border color change
+            icons[index].src= "./assets/Closed-Status.png"
+            
             borders[index].style.backgroundColor = "purple";
         }
         else if(text == "medium"){
@@ -104,7 +98,30 @@ let changecolor = ()=>{
         else if(text == "high"){
             item.classList.remove("bg-red-50","text-red-500");
             item.classList.add("bg-red-50","text-red-500");
-            borders[index].style.backgroundColor = "#10b981"; // green
+            borders[index].style.backgroundColor = "#10b981"; 
         }
     })
+}
+
+let filteritem = (data)=>{
+    let opendata = data.filter(item => item.status == "open")
+    let closedata = data.filter(item => item.status == "closed")
+    
+    return opendata ,closedata
+    
+}
+
+let tooglebtn = (id)=>{
+    let allbtn = document.querySelectorAll(".btns")
+
+    allbtn.forEach(btn => btn.classList.remove("btn-primary"))
+
+    let currentbtn = document.getElementById(id)
+    
+    currentbtn.classList.add("btn-primary")
+    if(currentbtn == "open"){
+        showcard(opendata)
+    } else if(currentbtn == "close"){
+        showcard(closedata)
+    }
 }
