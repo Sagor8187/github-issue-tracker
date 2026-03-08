@@ -2,9 +2,13 @@ let loadcard =async ()=>{
    let response = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
    let res = await response.json()
     // console.log(res.data.length)
+    totalcount(res.data)
     showcard(res.data)
 }
-
+let totalcount = (data)=>{
+    let total = document.getElementById("total-count")
+    total.innerText = data.length
+}
 let showcard = (info)=>{
     let getdiv = document.getElementById("card-section")
 
@@ -62,3 +66,12 @@ let showcard = (info)=>{
     });
 }
 loadcard()
+
+let tooglebtn = (id)=>{
+    let allbtn = document.querySelectorAll(".btn")
+
+    allbtn.forEach(btn => btn.classList.remove("btn-primary"))
+
+    let currentbtn = document.getElementById(id)
+    currentbtn.classList.add("btn-primary")
+}

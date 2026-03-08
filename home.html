@@ -51,9 +51,9 @@
         <!-- flilter button section -->
         <section>
             <div class="p-5 shadow-sm flex justify-start gap-4">
-                <button class="btn btn-primary px-9">All</button>
-                <button class="btn px-9">Open</button>
-                <button class="btn px-9">Close</button>
+                <button id="all" onclick="tooglebtn('all')" class="btn btn-primary px-9">All</button>
+                <button id="open" onclick="tooglebtn('open')" class="btn px-9">Open</button>
+                <button id="close" onclick="tooglebtn('close')" class="btn px-9">Close</button>
             </div>
         </section>
 
@@ -69,7 +69,7 @@
                         </div>
 
                         <div>
-                            <h2 class="text-xl font-bold text-slate-800">50 Issues</h2>
+                            <h2 class="text-xl font-bold text-slate-800"><span id="total-count"></span> Issues</h2>
                             <p class="text-gray-500 font-medium">Track and manage your project issues</p>
                         </div>
                     </div>
