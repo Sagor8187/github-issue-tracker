@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- navbar section -->
+    <section>
+        <div class="navbar bg-base-100 shadow-sm">
+            <div class="flex-1">
+                <a class="btn btn-ghost text-xl"><img class="h-7" src="./assets/github-logo.png" alt=""><span
+                        class="sm:hidden">GitHub Issues Tracker</span></a>
+            </div>
+            <div class="flex gap-2 relative">
+                <div>
+                    <i class="fa-solid fa-magnifying-glass absolute top-3 left-3 z-1"></i>
+                </div>
+                <input type="text" placeholder="   Search issues..." class="input input-bordered w-24 md:w-auto" />
+                <div class="dropdown dropdown-end">
+
+                    <div class="full">
+                        <button class="btn btn-primary">+ New Issue</button>
+                    </div>
+
+                    <ul tabindex="-1"
+                        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        <li>
+                            <a class="justify-between">
+                                Profile
+                                <span class="badge">New</span>
+                            </a>
+                        </li>
+                        <li><a>Settings</a></li>
+                        <li><a>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="p-20 space-y-10">
+        <!-- flilter button section -->
+        <section>
+            <div class="p-5 shadow-sm flex justify-start gap-4">
+                <button class="btn btn-primary px-9">All</button>
+                <button class="btn px-9">Open</button>
+                <button class="btn px-9">Close</button>
+            </div>
+        </section>
+
+        <!-- fetch from api load data count  -->
+        <section>
+            <div class="mt-1 mb-1 mx-auto">
+                <div class="bg-white border border-gray-100 rounded-lg shadow-sm p-6 flex items-center justify-between">
+
+                    <div class="flex items-center space-x-4">
+                        <div
+                            class="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-600">
+                            <img src="./assets/Aperture.png" alt="">
+                        </div>
+
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-800">50 Issues</h2>
+                            <p class="text-gray-500 font-medium">Track and manage your project issues</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-6">
+                        <div class="flex items-center space-x-2">
+                            <span class="w-3 h-3 bg-emerald-500 rounded-full"></span>
+                            <span class="text-slate-800 font-medium">Open</span>
+                        </div>
+
+                        <div class="flex items-center space-x-2">
+                            <span class="w-3 h-3 bg-purple-500 rounded-full"></span>
+                            <span class="text-slate-800 font-medium">Closed</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- fetch load card -->
+        <section class="p-4 shadow-sm mt-2 grid grid-cols-1 md:grid-cols-3 space-y-3 space-x-3" id="card-section">
+            
+        </section>
+
+    </section>
+
+    <script src="./load.js"></script>
+</body>
+
+</html>
