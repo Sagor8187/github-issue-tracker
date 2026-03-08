@@ -1,18 +1,44 @@
+let opendata = [];
+let closedata = [];
+let  counts = []
+
+
+let loading=()=>{
+    let active = document.querySelectorAll(".spiner")
+    active.forEach(spiner=>{
+        spiner.classList.remove("hidden")
+    })
+}
+
+let loadingoff=()=>{
+    let active = document.querySelectorAll(".spiner")
+    active.forEach(spiner=>{
+        spiner.classList.add("hidden")
+    })
+}
+
 let loadcard =async ()=>{
+    loading()
    let response = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
    let res = await response.json()
     // console.log(res.data.length)
+    counts = res.data;
     totalcount(res.data)
     showcard(res.data)
     filteritem(res.data)
+    loadingoff()
+    
+    
 }
 let totalcount = (data)=>{
     let total = document.getElementById("total-count")
     total.innerText = data.length
+    let counts = data
+    return counts
 }
 let showcard = (info)=>{
     let getdiv = document.getElementById("card-section")
-
+    getdiv.innerHTML = " "
     info.forEach(element => {
         let div = document.createElement("div")
 
@@ -104,10 +130,8 @@ let changecolor = ()=>{
 }
 
 let filteritem = (data)=>{
-    let opendata = data.filter(item => item.status == "open")
-    let closedata = data.filter(item => item.status == "closed")
-    
-    return opendata ,closedata
+    opendata = data.filter(item => item.status.toLowerCase() == "open")
+    closedata = data.filter(item => item.status.toLowerCase() == "closed")
     
 }
 
@@ -117,11 +141,42 @@ let tooglebtn = (id)=>{
     allbtn.forEach(btn => btn.classList.remove("btn-primary"))
 
     let currentbtn = document.getElementById(id)
-    
+    console.log(currentbtn.id)
     currentbtn.classList.add("btn-primary")
-    if(currentbtn == "open"){
+   if(currentbtn.id == "open"){
         showcard(opendata)
-    } else if(currentbtn == "close"){
+        totalcount(opendata)
+    } else if(currentbtn.id == "close"){
         showcard(closedata)
+        totalcount(closedata)
+    } else {
+        showcard(opendata.concat(closedata))
+        totalcount(counts)
     }
 }
+
+
+
+let searchdata = ()=>{
+    let data = document.getElementById("input-data")
+    data.addEventListener("input",(e)=>{
+        let query = e.target.value
+        if(query === ""){
+            showcard(counts)
+            totalcount(counts)
+            return
+        }
+        loading()
+         fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${query}`)
+        .then(res => res.json())
+        .then(data =>{
+           let item = data.data;
+           let newdata = item.filter(data=> data.title.toLowerCase().includes(query))
+           showcard(newdata)
+           totalcount(newdata)
+           loadingoff()
+        } )
+       
+    })
+}
+

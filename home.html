@@ -21,7 +21,7 @@
             <div class="flex gap-2 flex-1 justify-end items-center mt-2 md:mt-0">
                 <div class="relative flex-1 md:flex-none">
                     <i class="fa-solid fa-magnifying-glass absolute top-3 left-3 z-10 text-gray-400"></i>
-                    <input type="text" placeholder="Search issues..." class="input input-bordered w-full md:w-64 pl-10" />
+                    <input onclick="searchdata()" id="input-data" type="text" placeholder="Search issues..." class="input input-bordered w-full md:w-64 pl-10" />
                 </div>
                 <div>
                     <button class="btn btn-primary whitespace-nowrap">+ New Issue</button>
@@ -38,6 +38,12 @@
             <button id="open" onclick="tooglebtn('open')" class="btns btn flex-1 md:flex-none px-4 md:px-9">Open</button>
             <button id="close" onclick="tooglebtn('close')" class="btns btn flex-1 md:flex-none px-4 md:px-9">Close</button>
         </div>
+
+
+        <!-- loading -->
+        <section class="spiner flex justify-center hidden">
+            <span class="loading loading-bars loading-xl"></span>
+        </section>
 
         <!-- fetch from api load data count -->
         <div class="mt-1 mb-1 mx-auto">
@@ -67,6 +73,13 @@
                 </div>
             </div>
         </div>
+
+
+         <!-- loading -->
+        <section  class="spiner flex justify-center hidden">
+            <span class="loading loading-bars loading-xl"></span>
+        </section>
+
 
         <!-- fetch load card -->
         <section id="card-section" class="p-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
