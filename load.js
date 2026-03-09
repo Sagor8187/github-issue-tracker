@@ -68,19 +68,21 @@ let showcard = (info)=>{
                     </p>
 
                     <div class="flex flex-wrap gap-2 mb-2">
-                        <span
-                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-red-100 bg-red-50 text-red-500 text-sm font-semibold uppercase tracking-wide">
-                             ${element.labels[0]||""}
+                        ${element.labels[0]?`
+                            <span
+                            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-red-100 bg-red-50 text-red-500 text-sm font-semibold uppercase tracking-wide">
+                             ${element.labels[0]}
                             <i class="fa-solid fa-face-grimace text-xs"></i>
                            
                         </span>
+                            `: ""}
 
-                        <span
-                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-orange-100 bg-orange-50 text-orange-500 text-sm font-semibold uppercase tracking-wide">
+                        ${element.labels[1]?`<span
+                            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-orange-100 bg-orange-50 text-orange-500 text-sm font-semibold uppercase tracking-wide">
                             ${element.labels[1] ||""}
                             <i class="fa-solid fa-life-ring text-xs"></i>
                             
-                        </span>
+                        </span>`:""}
                     </div>
                 </div>
                     <hr class="text-slate-200">
